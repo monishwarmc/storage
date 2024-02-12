@@ -42,7 +42,7 @@ export default function Page() {
   let signer;
 
   const connect = async () => {
-    if (window.ethereum != null && window.ethereum !== undefined) {
+    if (typeof window !== 'undefined' && typeof window.ethereum !== undefined) {
       try {
         provider = new ethers.BrowserProvider(window.ethereum);
         signer = await provider.getSigner();
