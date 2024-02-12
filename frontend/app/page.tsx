@@ -2,7 +2,8 @@
 
 import { Contract } from "ethers";
 import { ethers } from "ethers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import abi from "../public/abi.json";
 
 export default function Page() {
   const [value, setValue] = useState(0);
@@ -10,39 +11,11 @@ export default function Page() {
   const [address, setAddress] = useState("");
   const [contract, setContract] = useState(""); 
   let conAdd = '0xE225DfFc9Fd5bAf3Dafd7AE56ffB61A14B13DdE6';
-  let abi = [
-    {
-      "inputs": [],
-      "name": "retrieve",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "num",
-          "type": "uint256"
-        }
-      ],
-      "name": "store",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ];
   let provider;
   let signer;
 
   const connect = async () => {
-    if (window !== null && window.ethereum !== null) {
+    if (window.ethereum != null && window.ethereum !== undefined) {
       try {
         provider = new ethers.BrowserProvider(window.ethereum);
         signer = await provider.getSigner();
